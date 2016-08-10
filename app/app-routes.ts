@@ -1,12 +1,13 @@
 ///<reference path='../typings/tsd.d.ts' />
 module wallaPadel {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('wallaPadel')
-    .config(config);
+    angular
+        .module('wallaPadel')
+        .config(config);
 
-  function config($urlRouterProvider: ng.ui.IUrlRouterProvider) {
-    $urlRouterProvider.otherwise('/home');
-  }
+    function config($urlRouterProvider: ng.ui.IUrlRouterProvider, $mdThemingProvider) {
+        $urlRouterProvider.otherwise('/home');
+        $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
+    }
 }
