@@ -4,7 +4,9 @@
   "scripts": {
     "test": "gulp test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "angularfire": "^2.0.1"
+  },
   "devDependencies": {
     "browser-sync": "^2.2.3",
     "del": "^2.0.0",
