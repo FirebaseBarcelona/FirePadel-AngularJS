@@ -2,3 +2,22 @@
 	width: 50%;
 	margin: 10px auto;
 }
+
+.toolbar-user {
+	margin-left: auto;
+}
+.toolbar-user span {
+	line-height: 40px;
+	margin-left: 5px;
+}
+.toolbar-user span,
+.toolbar-user-avatar {
+	vertical-align: middle;
+}
+.toolbar-user-avatar {
+	display: inline-block;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	background-size: cover;
+}

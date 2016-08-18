@@ -29,7 +29,6 @@ module HomeCtrl {
       if (this.isUserLogged()) {
         this.getCourts();
       } else {
-        console.log(this.getUserData);
         this.signUp().then((r) => {
           this.token = r.credential.accesToken;
           this.user = r.user;

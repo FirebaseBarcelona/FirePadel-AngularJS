@@ -1,14 +1,15 @@
 <md-card>
-    <md-content class="md-padding">
-
+    <md-toolbar class="md-padding">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">Court - {{data.id}}</span>
             </md-card-title-text>
         </md-card-title>
-        <md-card-actions layout="row">
-            <div class="court-avatar" style="background-image: url({{users.photoURL}});"></div>
-            <md-button class="md-raised md-primary">Join</md-button>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <md-card-actions>
+            <div class="court-avatar"></div>
+            <md-button class="md-raised md-primary court-join-button">Join</md-button>
         </md-card-actions>
     </md-content>
 
