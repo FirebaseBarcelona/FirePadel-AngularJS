@@ -1,15 +1,15 @@
-<md-card md-theme="dark-blue">
-    <md-card-title>
-        <md-card-title-text>
-            <span class="md-headline">Card with image</span>
-            <span class="md-subhead">Medium</span>
-        </md-card-title-text>
-        <md-card-title-media>
-            <div class="md-media-md card-media"></div>
-        </md-card-title-media>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="end center">
-        <md-button>Action 1</md-button>
-        <md-button>Action 2</md-button>
-    </md-card-actions>
+<md-card>
+    <md-content class="md-padding">
+
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Court - {{data.id}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row">
+            <div class="court-avatar" style="background-image: url({{users.photoURL}});"></div>
+            <md-button class="md-raised md-primary">Join</md-button>
+        </md-card-actions>
+    </md-content>
+
 </md-card>

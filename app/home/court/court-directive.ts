@@ -4,7 +4,10 @@ module Court {
   function CourtDirective(): ng.IDirective {
     return {
       restrict: 'EA',
-      scope: {},
+      scope: {
+        data: '=',
+        users: '=',
+      },
       templateUrl: 'home/court/court-directive.tpl.html',
       replace: false,
       controllerAs: 'court',

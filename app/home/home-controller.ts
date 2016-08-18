@@ -9,36 +9,50 @@ module HomeCtrl {
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: Array<string> = [
-      '$firebaseObject',
       '$firebaseAuth',
+      '$firebaseObject',
       '$firebaseArray',
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($firebaseObject, $firebaseAuth, $firebaseArray) {
+    constructor($firebaseAuth, $firebaseObject, $firebaseArray) {
       this.courts = [];
       this.$firebaseArray = $firebaseArray;
       this.$firebaseAuth = $firebaseAuth;
       this.$firebaseObject = $firebaseObject;
-      this.signUp();
+      this.user = null;
+      this.init();
+    }
+
+    private init() {
+      this.getUserData();
+      if (this.isUserLogged()) {
+        this.getCourts();
+      } else {
+        console.log(this.getUserData);
+        this.signUp().then((r) => {
+          this.token = r.credential.accesToken;
+          this.user = r.user;
+          this.getCourts();
+        });
+      }
+    }
+
+    private isUserLogged() {
+      return this.user !== null;
+    }
+
+    private getUserData() {
+      this.user = this.$firebaseAuth().$getAuth();
     }
 
     public signUp() {
-      let provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('https://www.googleapis.com/auth/plus.login');
-
-      firebase.auth().signInWithPopup(provider).then((r) => {
-        let token = r.credential.accessToken;
-        let user = r.user;
-        this.getDataBase();
-      });
+      return this.$firebaseAuth().$signInWithPopup("google");
     }
 
-    public getDataBase() {
+    public getCourts() {
       let courts = firebase.database().ref().child('courts');
       this.courts = this.$firebaseArray(courts);
-      console.log(this.courts);
-
     }
   }
 
