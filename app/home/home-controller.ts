@@ -11,22 +11,23 @@ module HomeCtrl {
     public static $inject: Array<string> = [
       '$firebaseObject',
       '$firebaseAuth',
+      '$firebaseArray',
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($firebaseObject, $firebaseAuth) {
+    constructor($firebaseObject, $firebaseAuth, $firebaseArray) {
       this.courts = [];
+      this.$firebaseArray = $firebaseArray;
       this.$firebaseAuth = $firebaseAuth;
       this.$firebaseObject = $firebaseObject;
       this.signUp();
-      this.getDataBase();
     }
 
     public signUp() {
       let provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('https://www.googleapis.com/auth/plus.login');
 
-      firebase.auth().signInWithPopup(provider).then( (r) => {
+      firebase.auth().signInWithPopup(provider).then((r) => {
         let token = r.credential.accessToken;
         let user = r.user;
         this.getDataBase();
@@ -34,11 +35,10 @@ module HomeCtrl {
     }
 
     public getDataBase() {
-      let ref = firebase.database().ref();
-      let data = this.$firebaseObject(ref);
-      this.courts = data.courts;
-      console.log(data);
-      console.log(data.courts);
+      let courts = firebase.database().ref().child('courts');
+      this.courts = this.$firebaseArray(courts);
+      console.log(this.courts);
+
     }
   }
 
