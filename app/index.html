@@ -3,6 +3,8 @@
   <head>
     <title>WallaPadel</title>
     <meta name='viewport' content='width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes'>
+
+
     <!-- inject:head:js -->
     <!-- endinject -->
     <!-- inject:html -->
@@ -11,16 +13,27 @@
     <!-- endbower -->
     <!-- inject:css -->
     <!-- endinject -->
+
   </head>
   <body>
 
     <div data-ui-view>
 
     </div>
-
     <!-- bower:js -->
     <!-- endbower -->
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBWTxmNMGCyjdZtVnYpA6XrQgxPWiQo2nc",
+        authDomain: "padel-109d5.firebaseapp.com",
+        databaseURL: "https://padel-109d5.firebaseio.com",
+        storageBucket: "padel-109d5.appspot.com",
+      };
+      firebase.initializeApp(config);
+    </script>
     <!-- inject:js -->
     <!-- endinject -->
+
   </body>
 </html>

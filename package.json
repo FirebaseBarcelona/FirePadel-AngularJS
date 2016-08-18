@@ -4,10 +4,8 @@
   "scripts": {
     "test": "gulp test"
   },
-  "dependencies": {
-    "angularfire": "^2.0.1"
-  },
   "devDependencies": {
+    "angularfire": "^2.0.1",
     "browser-sync": "^2.2.3",
     "del": "^2.0.0",
     "eslint-config-angular": "^0.2.0",

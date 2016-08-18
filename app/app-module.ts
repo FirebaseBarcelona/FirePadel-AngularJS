@@ -11,6 +11,7 @@ module wallaPadel {
     .module('wallaPadel', [
       'ngMaterial',
       'ui.router',
+      'firebase',
       'home'
     ]);
 }
