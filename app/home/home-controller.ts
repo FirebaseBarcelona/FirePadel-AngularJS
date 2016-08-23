@@ -27,6 +27,7 @@ module HomeCtrl {
     private init() {
       this.getUserData();
       if (this.isUserLogged()) {
+        console.log('is loged');
         this.getCourts();
       } else {
         this.signUp().then((r) => {
@@ -38,6 +39,7 @@ module HomeCtrl {
     }
 
     private isUserLogged() {
+      console.log(this.user);
       return this.user !== null;
     }
 
@@ -52,6 +54,11 @@ module HomeCtrl {
     public getCourts() {
       let courts = firebase.database().ref().child('courts');
       this.courts = this.$firebaseArray(courts);
+    }
+
+    public readMessages() {
+      let messages = firebase.database().ref().child('messsages');
+      console.log(messages);
     }
   }
 

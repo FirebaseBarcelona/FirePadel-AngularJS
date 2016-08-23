@@ -20,11 +20,25 @@ module Court {
   }
 
   export class CourtController {
-    public name;
-    public static $inject: Array<string> = [];
 
-    constructor() {
-      this.name = 'court';
+    public static $inject: Array<string> = [
+      '$firebaseAuth',
+      '$firebaseObject',
+      '$firebaseArray',
+    ];
+
+    constructor($firebaseAuth, $firebaseObject, $firebaseArray) {
+      this.$firebaseArray = $firebaseArray;
+      this.$firebaseAuth = $firebaseAuth;
+      this.$firebaseObject = $firebaseObject;
+    }
+
+    public joinCourt(court) {
+      let courtRef = new firebase.database().ref().child('courts/court' + court);
+      let courtObject = this.$firebaseObject(courtRef);
+      let usersArray = this.$firebaseArray(new firebase.database().ref().child('courts/court'+ court+'/users'));
+      usersArray.$add({name: 'Jeff', email: 'jeff@wallapop.com', avatar: 'https://lh3.googleusercontent.com/-ChdH-fy3imI/AAAAAAAAAAI/AAAAAAAAAAA/HECUgEmD-7g/W96-H96/photo.jpg?sz=64'});
+      console.log(usersArray);
     }
   }
 
