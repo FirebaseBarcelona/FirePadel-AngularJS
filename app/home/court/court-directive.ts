@@ -34,6 +34,7 @@ module Court {
     }
 
     public joinCourt(court) {
+      console.log(this);
       let courtRef = new firebase.database().ref().child('courts/court' + court);
       let courtObject = this.$firebaseObject(courtRef);
       let usersArray = this.$firebaseArray(new firebase.database().ref().child('courts/court'+ court+'/users'));
