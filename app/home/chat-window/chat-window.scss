@@ -1,0 +1,18 @@
+chat-window {
+	& {
+		background-color: #eceff1;
+		float: right;
+		width: 400px;
+		padding: 10px;
+	}
+	md-input-container {
+		& {
+			display: block;
+			width: 100%;
+			padding-bottom: 5px;
+		}
+		input {
+			width: calc(100% - 42px);
+		}
+	}
+}

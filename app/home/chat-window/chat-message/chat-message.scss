@@ -1,0 +1,46 @@
+
+chat-message {
+	$avatar-width: 32px;
+	& {
+		display: block;
+		overflow: hidden;
+		margin-top: 20px;
+	}
+	&.self-author {
+		.chat-message-text {
+			float: left;
+			background-color: #cfd8dc;
+		}
+		.chat-message-avatar {
+			float: right;
+			text-align: right;
+		}
+		.chat-message-author {
+			text-align: center;
+		}
+	}
+	.chat-message-avatar {
+		& {
+			float: left;
+			width: $avatar-width;
+			height: $avatar-width;
+			border-radius: 50%;
+			background-image: url('https://lh3.googleusercontent.com/-ChdH-fy3imI/AAAAAAAAAAI/AAAAAAAAAAA/AGNl-OoMT-2tvJ6t0ALqaHYSXKowwVTzrQ/s32-c-mo/photo.jpg');
+		}
+	}
+	.chat-message-text {
+		color: #263238;
+		font-size:13px;
+		line-height:16px;
+		float: right;
+		width: calc(100% - 66px);
+		padding: 7px;
+		margin-right: 10px;
+		background-color: #fff;
+		border-radius: 4px;
+	}
+	.chat-message-author {
+		color: rgba(0, 0, 0, .54);
+		font-size: 11px;
+	}
+}
