@@ -1,10 +1,10 @@
-
 chat-message {
 	$avatar-width: 32px;
 	& {
 		display: block;
 		overflow: hidden;
 		margin-top: 20px;
+		width: calc( 100% - 4px);
 	}
 	&.self-author {
 		.chat-message-text {
@@ -13,10 +13,9 @@ chat-message {
 		}
 		.chat-message-avatar {
 			float: right;
-			text-align: right;
 		}
 		.chat-message-author {
-			text-align: center;
+			float: right;
 		}
 	}
 	.chat-message-avatar {
@@ -40,6 +39,10 @@ chat-message {
 		border-radius: 4px;
 	}
 	.chat-message-author {
+		float: left;
+		padding-top: 3px;
+		text-align: center;
+		width: 32px;
 		color: rgba(0, 0, 0, .54);
 		font-size: 11px;
 	}
