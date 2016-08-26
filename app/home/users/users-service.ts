@@ -12,6 +12,7 @@ module Users {
     public static $inject: Array<string> = [];
 
     constructor() {
+
     }
 
 

@@ -2,14 +2,19 @@
 module Court {
   'use strict';
 
-  export class Court {
-    public static $inject: Array<string> = [];
+  class Court {
+    private courts: AngularFireArray;
+    private $firebaseArray: AngularFireArrayService;
+    public static $inject: Array<string> = [
+      '$firebaseArray'
+    ];
 
-    constructor() {
+    constructor($firebaseArray: AngularFireArrayService) {
+      this.$firebaseArray = $firebaseArray;
     }
 
     public getCourts() {
-      return firebase.database().ref().child('courts');
+      return firebase.database().ref().child('courts')
     }
   }
 
