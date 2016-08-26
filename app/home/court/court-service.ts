@@ -1,30 +1,26 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module Users {
+module Court {
   'use strict';
 
-  interface IUser {
-    id: string,
-    name: string,
-    avatar: string
-  }
-  class Users {
-
+  export class Court {
     public static $inject: Array<string> = [];
 
     constructor() {
     }
 
-
+    public getCourts() {
+      return firebase.database().ref().child('courts');
+    }
   }
 
   /**
    * @ngdoc service
-   * @name home.service:Users
+   * @name home.service:Court
    *
    * @description
    *
    */
   angular
     .module('home')
-    .service('Users', Users);
+    .service('Court', Court);
 }

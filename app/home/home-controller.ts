@@ -4,64 +4,60 @@ module HomeCtrl {
 
   class HomeCtrl {
 
+    private authService: Auth.Auth;
+    private courtService: Court.Court;
+    private $firebaseArray: AngularFireArray;
+    private $firebaseObject: AngularFireObject;
+    public courts: Array;
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: Array<string> = [
-      '$firebaseAuth',
       '$firebaseObject',
       '$firebaseArray',
+      'Auth',
+      'Court'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($firebaseAuth, $firebaseObject, $firebaseArray) {
+    constructor($firebaseObject: AngularFireObject,
+                $firebaseArray: AngularFireArray,
+                Auth: Auth.Auth,
+                Court: Court.Court) {
       this.courts = [];
       this.$firebaseArray = $firebaseArray;
-      this.$firebaseAuth = $firebaseAuth;
       this.$firebaseObject = $firebaseObject;
-      this.user = null;
+      this.authService = Auth;
+      this.courtService = Court;
       this.init();
     }
 
     private init() {
-      this.getUserData();
       if (this.isUserLogged()) {
-        console.log('is loged');
-        this.getCourts();
+        console.log('Is logged');
+        this.setCourts(this.courtService.getCourts());
       } else {
-        this.signUp().then((r) => {
-          this.token = r.credential.accesToken;
-          this.user = r.user;
-          this.getCourts();
-        });
+        console.log('Isn\'t logged');
+        this.logIn();
       }
     }
 
+    private logIn() {
+      this.authService.signInWithGoogle().then((r) => {
+        console.log(r);
+      })
+    }
+
     private isUserLogged() {
-      console.log(this.user);
-      return this.user !== null;
+      return this.authService.getAuth() !== null;
     }
 
-    private getUserData() {
-      this.user = this.$firebaseAuth().$getAuth();
-    }
-
-    public signUp() {
-      return this.$firebaseAuth().$signInWithPopup("google");
-    }
-
-    public getCourts() {
-      let courts = firebase.database().ref().child('courts');
+    public setCourts(courts) {
       this.courts = this.$firebaseArray(courts);
     }
 
-    public readMessages() {
-      let messages = firebase.database().ref().child('messsages');
-      console.log(messages);
-    }
   }
-
 
   /**
    * @ngdoc object

@@ -6,15 +6,25 @@ module Auth {
     private $firebaseAuth: AngularFireAuthService;
 
     public static $inject: Array<string> = [
+      '$firebaseAuth'
     ];
 
     constructor($firebaseAuth: AngularFireAuthService) {
       this.$firebaseAuth = $firebaseAuth;
     }
 
-    get(): string {
-      return 'Auth';
+    private signInWithPopup(signInMethod) {
+      return this.$firebaseAuth().$signInWithPopup(signInMethod);
     }
+
+    public signInWithGoogle() {
+      return this.signInWithPopup('google');
+    }
+
+    public getAuth() {
+      return this.$firebaseAuth().$getAuth();
+    }
+
   }
 
   /**
