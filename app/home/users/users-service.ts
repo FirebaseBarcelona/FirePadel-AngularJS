@@ -3,18 +3,29 @@ module Users {
   'use strict';
 
   interface IUser {
-    id: string,
+    uuid: string,
     name: string,
     avatar: string
   }
   class Users {
-
+    private userData: IUser;
     public static $inject: Array<string> = [];
 
     constructor() {
 
     }
 
+    public setUserData(userData) {
+      this.userData = {
+        email: userData.email,
+        uuid: userData.uid,
+        avatar: userData.photoURL,
+        name: userData.displayName
+      }
+    }
+    public getUserData() {
+      return this.userData;
+    }
 
   }
 

@@ -17,35 +17,39 @@ module HomeCtrl {
       '$firebaseObject',
       '$firebaseArray',
       'Auth',
+      'Users',
       'Court'
     ];
 
     // dependencies are injected via AngularJS $injector
     constructor($firebaseObject: AngularFireObjectService,
                 $firebaseArray: AngularFireArrayService,
-                Auth: Court.Court,
+                Auth: Auth.Auth,
+                Users: any,
                 Court: Court.Court) {
       this.courts = [];
       this.$firebaseArray = $firebaseArray;
       this.$firebaseObject = $firebaseObject;
       this.authService = Auth;
+      this.userService = Users;
       this.courtService = Court;
       this.init();
     }
 
     private init() {
       if (this.isUserLogged()) {
-        this.user = this.authService.getUserData();
+        console.log('IUs logged');
+        this.userService.setUserData(this.authService.getUserData());
         this.setCourts(this.courtService.getCourts());
       } else {
-        this.logIn();
+        this.logIn().then(() => {
+          this.setCourts(this.courtService.getCourts());
+        });
       }
     }
 
     private logIn() {
-      this.authService.signInWithGoogle().then((r) => {
-        console.log(r);
-      })
+      return this.authService.signInWithGoogle();
     }
 
     private isUserLogged() {
@@ -54,10 +58,6 @@ module HomeCtrl {
 
     public setCourts(courts) {
       this.courts = this.$firebaseArray(courts);
-    }
-
-    public hasAlreadyJoined(){
-      console.log(courts);
     }
 
   }

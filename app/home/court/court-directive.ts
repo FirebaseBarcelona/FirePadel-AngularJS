@@ -21,29 +21,33 @@ module Court {
 
   export class CourtController {
 
+    private $firebaseArray: AngularFireArrayService;
+    private $firebaseObject: AngularFireObjectService;
+    private userService: any;
     public static $inject: Array<string> = [
-      '$firebaseAuth',
       '$firebaseObject',
-      '$firebaseArray'
+      '$firebaseArray',
+      'Users'
     ];
 
-    constructor($firebaseAuth, $firebaseObject, $firebaseArray) {
+    constructor($firebaseObject, $firebaseArray, Users) {
       this.$firebaseArray = $firebaseArray;
-      this.$firebaseAuth = $firebaseAuth;
       this.$firebaseObject = $firebaseObject;
+      this.userService = Users;
+      console.log('court directive');
     }
 
     public joinCourt(court) {
-      console.log(this);
-      let courtRef = new firebase.database().ref().child('courts/court' + court);
-      let courtObject = this.$firebaseObject(courtRef);
-      let usersArray = this.$firebaseArray(new firebase.database().ref().child('courts/court' + court + '/users'));
-      usersArray.$add({
-        name:   'Jeff',
-        email:  'jeff@wallapop.com',
-        avatar: 'https://lh3.googleusercontent.com/-ChdH-fy3imI/AAAAAAAAAAI/AAAAAAAAAAA/HECUgEmD-7g/W96-H96/photo.jpg?sz=64'
-      });
-      console.log(usersArray);
+      console.log(this.userService);
+      let userData = this.userService.getUserData();
+      let usersArray = this.$firebaseObject(new firebase.database().ref().child(`courts/court${court}/users/${userData.uuid}`));
+      let userData = {
+        name: userData.name,
+        email: userData.email,
+        avatar: userData.avatar,
+        uuid: userData.uuid
+      };
+      usersArray.$bindTo(this.userData, 'userData');
     }
   }
 
