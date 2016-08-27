@@ -24,7 +24,7 @@ chat-message {
 			width: $avatar-width;
 			height: $avatar-width;
 			border-radius: 50%;
-			background-image: url('https://lh3.googleusercontent.com/-ChdH-fy3imI/AAAAAAAAAAI/AAAAAAAAAAA/AGNl-OoMT-2tvJ6t0ALqaHYSXKowwVTzrQ/s32-c-mo/photo.jpg');
+			background-size: cover;
 		}
 	}
 	.chat-message-text {

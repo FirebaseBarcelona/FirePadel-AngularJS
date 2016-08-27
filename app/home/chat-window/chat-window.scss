@@ -1,4 +1,6 @@
 chat-window {
+	$chat-height: 600px;
+	$chat-width: 400px;
 	& {
 		background-color: #eceff1;
 		width: 400px;
@@ -6,12 +8,12 @@ chat-window {
 		position: absolute;
 		bottom: 0;
 		right: 0;
-		height: 600px;
+		height: $chat-height;
 	}
 	.chat-window-container {
 		position: absolute;
-		width: 400px;
-		height: 600px;
+		width: $chat-width;
+		height: $chat-height;
 	}
 	.chat-messages-container {
 		position: relative;
@@ -36,10 +38,12 @@ chat-window {
 				display: inline-block !important;
 				position: relative;
 				vertical-align: middle;
-				line-height:30px;
+				line-height: 30px;
 				color: #9d9b99 !important;
 				fill: #9d9b99;
 				cursor: not-allowed;
+				user-select: none;
+				outline: none;
 			}
 			&:hover {
 				opacity: .9;
