@@ -5,7 +5,9 @@ module ChatMessage {
   function ChatMessageDirective(): ng.IDirective {
     return {
       restrict: 'EA',
-      scope: {},
+      scope: {
+        message: '='
+      },
       templateUrl: 'home/chat-window/chat-message/chat-message-directive.tpl.html',
       replace: false,
       controllerAs: 'chatMessage',

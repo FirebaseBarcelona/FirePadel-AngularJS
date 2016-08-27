@@ -18,11 +18,27 @@ module ChatWindow {
   }
 
   export class ChatWindowController {
+    private messageService: Messages.Messages;
+    private authService: Auth.Auth;
+    public messages: Array;
     public name: string;
-    public static $inject: Array<string> = [];
+    public static $inject: Array<string> = [
+      'Messages'
+    ];
 
-    constructor() {
+    constructor(Messages: Messages.Messages, Auth: Auth.Auth) {
       this.name = 'chatWindow';
+      this.messageService = Messages;
+      this.authService = Auth;
+      this.getMessages();
+      console.log(this.messageService);
+    }
+    private getMessages() {
+      this.messages = this.messageService.getChat();
+    }
+
+    public sendMessage() {
+      this.messageService.sendMessage(message, this.authService.getUserData());
     }
   }
 

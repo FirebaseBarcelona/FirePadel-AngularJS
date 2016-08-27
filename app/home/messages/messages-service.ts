@@ -3,15 +3,31 @@ module Messages {
   'use strict';
 
   class Messages {
+    public messages: AngularFireArray;
+    private $firebaseArray: AngularFireArrayService;
     public static $inject: Array<string> = [
+      '$firebaseArray'
     ];
 
-    constructor() {
+    constructor($firebaseArray: AngularFireArrayService) {
+      this.$firebaseArray = $firebaseArray;
+
     }
 
-    get(): string {
-      return 'Messages';
+    public getChat() {
+      return this.messages;
     }
+    public setChat(courtId) {
+      this.$firebaseArray(new firebase.database().ref().child(`courts/court${courtId}/messages`)).$loaded((messages) => {
+        this.messages = messages;
+      });
+    }
+    
+    public sendMessage(message, author) {
+      console.log(message);
+      console.log(author);
+    }
+    
   }
 
   /**

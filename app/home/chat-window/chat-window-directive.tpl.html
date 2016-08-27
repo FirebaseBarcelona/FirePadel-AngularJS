@@ -1,13 +1,6 @@
 <div class="chat-window-container">
     <div class="chat-messages-container">
-        <chat-message></chat-message>
-        <chat-message class="self-author"></chat-message>
-        <chat-message></chat-message>
-        <chat-message class="self-author"></chat-message>
-        <chat-message></chat-message>
-        <chat-message class="self-author"></chat-message>
-        <chat-message></chat-message>
-        <chat-message class="self-author"></chat-message>
+        <chat-message ng-repeat="message in chatWindow.messages" message="message"></chat-message>
     </div>
 
     <md-input-container md-no-float class="md-block">

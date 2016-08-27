@@ -42,6 +42,9 @@ module Court {
       return this.$firebaseObject(new firebase.database().ref().child(`courts/court${this.$scope.data.id}/users/${uuid}`));
     }
 
+    public leaveCourt() {
+
+    }
     public joinCourt() {
       let userData = this.userService.getUserData();
       console.log(this);

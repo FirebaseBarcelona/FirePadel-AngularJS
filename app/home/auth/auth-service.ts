@@ -4,6 +4,7 @@ module Auth {
 
   class Auth {
     private $firebaseAuth: AngularFireAuthService;
+    private userData: any;
 
     public static $inject: Array<string> = [
       '$firebaseAuth'
@@ -11,6 +12,7 @@ module Auth {
 
     constructor($firebaseAuth: AngularFireAuthService) {
       this.$firebaseAuth = $firebaseAuth;
+      this.loadUserData();
     }
 
     private signInWithPopup(signInMethod) {
@@ -21,8 +23,12 @@ module Auth {
       return this.signInWithPopup('google');
     }
 
+    private loadUserData() {
+      this.userData = this.$firebaseAuth().$getAuth();
+  }
+
     public getUserData() {
-      return this.$firebaseAuth().$getAuth();
+      return this.userData;
     }
 
   }

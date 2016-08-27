@@ -7,6 +7,7 @@ module HomeCtrl {
     private authService: Auth.Auth;
     private courtService: Court.Court;
     private userService: User.User;
+    private messageService: Messages.Messages;
     private $firebaseArray: AngularFireArrayService;
     private $firebaseObject: AngularFireObjectService;
     public courts: Array;
@@ -19,7 +20,8 @@ module HomeCtrl {
       '$firebaseArray',
       'Auth',
       'Users',
-      'Court'
+      'Court',
+      'Messages',
     ];
 
     // dependencies are injected via AngularJS $injector
@@ -27,19 +29,20 @@ module HomeCtrl {
                 $firebaseArray: AngularFireArrayService,
                 Auth: Auth.Auth,
                 Users: Users.Users,
-                Court: Court.Court) {
+                Court: Court.Court,
+                Messages: Messages.Messages) {
       this.courts = [];
       this.$firebaseArray = $firebaseArray;
       this.$firebaseObject = $firebaseObject;
       this.authService = Auth;
       this.userService = Users;
       this.courtService = Court;
+      this.messageService = Messages;
       this.init();
     }
 
     private init() {
       if (this.isUserLogged()) {
-        console.log('Is logged');
         this.userService.setUserData(this.authService.getUserData());
         this.setCourts(this.courtService.getCourts());
         this.checkIfAlreadyJoined();
@@ -49,19 +52,27 @@ module HomeCtrl {
           this.checkIfAlreadyJoined();
         });
       }
+
     }
 
     private checkIfAlreadyJoined() {
-      console.log('checking');
       this.courts.$loaded((courts: Array) => {
-        courts.filter((court)=> {
-          console.log(court.users);
-          court.users.filter((u)=>{
-            console.log(u);
-          });
+        let joinedCourts = courts.filter((court) => {
+          for (let k in court.users) {
+            if (court.users[k].uuid === this.authService.getUserData().uid) {
+              court.joined = true;
+              return true;
+            }
+          }
+          return false;
         });
+        if (joinedCourts.length > 0) {
+          this.messageService.setChat(joinedCourts[0].id);
+        }
       });
     }
+
+
     private logIn() {
       return this.authService.signInWithGoogle();
     }

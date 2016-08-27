@@ -11,9 +11,7 @@
         </div>
     </div>
 </md-toolbar>
-<chat-window>
-
-</chat-window>
+<chat-window ng-if="home.messageService.messages != undefined"></chat-window>
 <div class="court-container">
     <court ng-repeat="court in home.courts" data="court" users="home.user"></court>
 </div>
