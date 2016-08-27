@@ -10,6 +10,7 @@ module wallaPadel {
   angular
     .module('wallaPadel', [
       'ngMaterial',
+      'luegg.directives',
       'ui.router',
       'firebase',
       'home'
