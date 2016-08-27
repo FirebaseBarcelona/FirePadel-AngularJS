@@ -1,5 +1,5 @@
 <div class="chat-window-container">
-    <div class="chat-messages-container" sascroll-glue>
+    <div class="chat-messages-container" scroll-glue>
         <chat-message ng-class="{'self-author' : message.uuid == chatWindow.authorId}"
                       ng-repeat="message in chatWindow.messages"
                       message="message"></chat-message>
