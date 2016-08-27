@@ -14,7 +14,11 @@
                     person_add
                 </md-icon>
             </md-button>
-            <md-button ng-show="data.joined" class="md-fab md-warn court-join-button" ng-click="court.leaveCourt()">Leave</md-button>
+            <md-button ng-show="data.joined" class="md-fab md-warn court-join-button" ng-click="court.leaveCourt()">
+                <md-icon md-font-library="material-icons">
+                    clear
+                </md-icon>
+            </md-button>
         </md-card-actions>
     </md-content>
 </md-card>
