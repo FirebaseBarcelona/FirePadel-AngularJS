@@ -23,21 +23,22 @@ module ChatWindow {
     public messages: Array;
     public name: string;
     public static $inject: Array<string> = [
-      'Messages'
+      'Messages',
+      'Auth'
     ];
 
     constructor(Messages: Messages.Messages, Auth: Auth.Auth) {
       this.name = 'chatWindow';
       this.messageService = Messages;
       this.authService = Auth;
+      this.authorId = this.authService.getUserData().uid;
       this.getMessages();
-      console.log(this.messageService);
     }
     private getMessages() {
       this.messages = this.messageService.getChat();
     }
 
-    public sendMessage() {
+    public sendMessage(message) {
       this.messageService.sendMessage(message, this.authService.getUserData());
     }
   }

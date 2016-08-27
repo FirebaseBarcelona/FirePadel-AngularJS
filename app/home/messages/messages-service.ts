@@ -11,23 +11,28 @@ module Messages {
 
     constructor($firebaseArray: AngularFireArrayService) {
       this.$firebaseArray = $firebaseArray;
-
     }
 
     public getChat() {
       return this.messages;
     }
+
     public setChat(courtId) {
-      this.$firebaseArray(new firebase.database().ref().child(`courts/court${courtId}/messages`)).$loaded((messages) => {
-        this.messages = messages;
-      });
+      this.messages = this.$firebaseArray(new firebase.database().ref().child(`courts/court${courtId}/messages`));
     }
-    
+
     public sendMessage(message, author) {
-      console.log(message);
-      console.log(author);
+      let newMessage = {
+        message: message,
+        name: author.displayName,
+        uuid: author.uid
+      };
+      console.log(newMessage);
+
+      this.messages.$add(newMessage);
+
     }
-    
+
   }
 
   /**

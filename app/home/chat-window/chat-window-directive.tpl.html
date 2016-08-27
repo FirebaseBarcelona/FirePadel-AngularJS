@@ -1,10 +1,12 @@
 <div class="chat-window-container">
     <div class="chat-messages-container">
-        <chat-message ng-repeat="message in chatWindow.messages" message="message"></chat-message>
+        <chat-message ng-class="{'self-author' :message.uuid == chatWindow.authorId}"
+                      ng-repeat="message in chatWindow.messages | orderBy: '-'"
+                      message="message"></chat-message>
     </div>
 
     <md-input-container md-no-float class="md-block">
-        <input  type="text" placeholder="Message">
-        <md-icon md-font-library="material-icons">send</md-icon>
+        <input type="text" placeholder="Message" ng-model="chatWindow.message">
+        <md-icon md-font-library="material-icons" ng-click="chatWindow.sendMessage(chatWindow.message)">send</md-icon>
     </md-input-container>
 </div>
