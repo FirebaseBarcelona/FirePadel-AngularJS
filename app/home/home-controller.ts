@@ -49,6 +49,7 @@ module HomeCtrl {
       } else {
         this.logIn().then((r) => {
           this.authService.setUserData(r.user);
+          console.log(r.user);
           this.setCourts(this.courtService.getCourts());
           this.checkIfAlreadyJoined();
         });

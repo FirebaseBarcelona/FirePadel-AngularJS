@@ -25,7 +25,7 @@ module Messages {
       if (message !== null && message !== '') {
         let newMessage = {
           message: message,
-          name: author.displayName,
+          name: author.displayName.split(' ')[0],
           avatar: author.photoURL,
           uuid: author.uid
         };

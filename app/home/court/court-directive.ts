@@ -63,7 +63,7 @@ module Court {
     public joinCourt() {
       this.$scope.data.joined = true;
       let userData = this.userService.getUserData();
-      let userObject = this.$firebaseObject(new firebase.database().ref().child(`courts/court${this.$scope.data.id}/users/${userData.uuid}`));
+      let userObject = this.$firebaseObject(new firebase.database().ref().child(`courts/court${this.$scope.data.id}/users/${userData.uid}`));
       userObject.name = userData.name;
       userObject.email = userData.email;
       userObject.avatar = userData.avatar;
