@@ -52,7 +52,7 @@ module Court {
     }
 
     public leaveCourt() {
-      this.$scope.data.joined = false;
+      this.joined = false;
       this.$firebaseObject(
         new firebase.database()
           .ref()
@@ -61,13 +61,15 @@ module Court {
     }
 
     public joinCourt() {
-      this.$scope.data.joined = true;
-      let userData = this.userService.getUserData();
+      this.joined = true;
+
+      let userData = this.authService.getUserData();
       let userObject = this.$firebaseObject(new firebase.database().ref().child(`courts/court${this.$scope.data.id}/users/${userData.uid}`));
-      userObject.name = userData.name;
+      userObject.name = userData.displayName.split(' ')[0];
       userObject.email = userData.email;
-      userObject.avatar = userData.avatar;
-      userObject.uuid = userData.uuid;
+      userObject.avatar = userData.photoURL;
+      userObject.uuid = userData.uid;
+
       userObject.$save();
     }
   }

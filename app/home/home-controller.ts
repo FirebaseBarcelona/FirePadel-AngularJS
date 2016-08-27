@@ -43,7 +43,8 @@ module HomeCtrl {
 
     private init() {
       if (this.isUserLogged()) {
-        this.userService.setUserData(this.authService.getUserData());
+        this.authService.setUserData(this.authService.getUserData());
+        console.log(this.authService.getUserData());
         this.setCourts(this.courtService.getCourts());
         this.checkIfAlreadyJoined();
       } else {
