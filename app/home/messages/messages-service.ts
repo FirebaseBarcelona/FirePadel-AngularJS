@@ -22,15 +22,15 @@ module Messages {
     }
 
     public sendMessage(message, author) {
-      let newMessage = {
-        message: message,
-        name: author.displayName,
-        uuid: author.uid
-      };
-      console.log(newMessage);
-
-      this.messages.$add(newMessage);
-
+      if (message !== null && message !== '') {
+        let newMessage = {
+          message: message,
+          name: author.displayName,
+          avatar: author.photoURL,
+          uuid: author.uid
+        };
+        this.messages.$add(newMessage);
+      }
     }
 
   }
