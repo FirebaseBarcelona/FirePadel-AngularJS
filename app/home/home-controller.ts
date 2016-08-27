@@ -6,6 +6,7 @@ module HomeCtrl {
 
     private authService: Auth.Auth;
     private courtService: Court.Court;
+    private userService: User.User;
     private $firebaseArray: AngularFireArrayService;
     private $firebaseObject: AngularFireObjectService;
     public courts: Array;
@@ -25,7 +26,7 @@ module HomeCtrl {
     constructor($firebaseObject: AngularFireObjectService,
                 $firebaseArray: AngularFireArrayService,
                 Auth: Auth.Auth,
-                Users: any,
+                Users: Users.Users,
                 Court: Court.Court) {
       this.courts = [];
       this.$firebaseArray = $firebaseArray;
@@ -38,16 +39,29 @@ module HomeCtrl {
 
     private init() {
       if (this.isUserLogged()) {
-        console.log('IUs logged');
+        console.log('Is logged');
         this.userService.setUserData(this.authService.getUserData());
         this.setCourts(this.courtService.getCourts());
+        this.checkIfAlreadyJoined();
       } else {
         this.logIn().then(() => {
           this.setCourts(this.courtService.getCourts());
+          this.checkIfAlreadyJoined();
         });
       }
     }
 
+    private checkIfAlreadyJoined() {
+      console.log('checking');
+      this.courts.$loaded((courts: Array) => {
+        courts.filter((court)=> {
+          console.log(court.users);
+          court.users.filter((u)=>{
+            console.log(u);
+          });
+        });
+      });
+    }
     private logIn() {
       return this.authService.signInWithGoogle();
     }
@@ -57,7 +71,7 @@ module HomeCtrl {
     }
 
     public setCourts(courts) {
-      this.courts = this.$firebaseArray(courts);
+      this.courts = courts;
     }
 
   }

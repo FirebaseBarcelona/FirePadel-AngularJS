@@ -3,16 +3,16 @@ module Court {
 
   function CourtDirective(): ng.IDirective {
     return {
-      restrict:     'EA',
-      scope:        {
+      restrict: 'EA',
+      scope: {
         data: '=',
         users: '='
       },
-      templateUrl:  'home/court/court-directive.tpl.html',
-      replace:      false,
+      templateUrl: 'home/court/court-directive.tpl.html',
+      replace: false,
       controllerAs: 'court',
-      controller:   CourtController,
-      link:         function (scope: ng.IScope, element: JQuery, attrs: any): void {
+      controller: CourtController,
+      link: function (scope: ng.IScope, element: JQuery, attrs: any): void {
         /*jshint unused:false */
         /*eslint "no-unused-vars": [2, {"args": "none"}]*/
       }
@@ -27,27 +27,31 @@ module Court {
     public static $inject: Array<string> = [
       '$firebaseObject',
       '$firebaseArray',
-      'Users'
+      'Users',
+      '$scope'
     ];
 
-    constructor($firebaseObject, $firebaseArray, Users) {
+    constructor($firebaseObject, $firebaseArray, Users, $scope) {
       this.$firebaseArray = $firebaseArray;
+      this.$scope = $scope;
       this.$firebaseObject = $firebaseObject;
       this.userService = Users;
-      console.log('court directive');
     }
 
-    public joinCourt(court) {
-      console.log(this.userService);
+    public hasAlreadyJoined(uuid): boolean {
+      return this.$firebaseObject(new firebase.database().ref().child(`courts/court${this.$scope.data.id}/users/${uuid}`));
+    }
+
+    public joinCourt() {
       let userData = this.userService.getUserData();
-      let usersArray = this.$firebaseObject(new firebase.database().ref().child(`courts/court${court}/users/${userData.uuid}`));
-      let userData = {
-        name: userData.name,
-        email: userData.email,
-        avatar: userData.avatar,
-        uuid: userData.uuid
-      };
-      usersArray.$bindTo(this.userData, 'userData');
+      console.log(this);
+      let userObject = this.$firebaseObject(new firebase.database().ref().child(`courts/court${this.$scope.data.id}/users/${userData.uuid}`));
+      /* userObject.name = userData.name;
+       userObject.email = userData.email;
+       userObject.avatar = userData.avatar;
+       userObject.uuid = userData.uuid;
+       userObject.$save();*/
+      console.log(userObject);
     }
   }
 

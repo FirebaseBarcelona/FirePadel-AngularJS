@@ -25,7 +25,6 @@ module Auth {
       return this.$firebaseAuth().$getAuth();
     }
 
-
   }
 
   /**

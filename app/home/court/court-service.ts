@@ -14,7 +14,7 @@ module Court {
     }
 
     public getCourts() {
-      return firebase.database().ref().child('courts')
+      return this.$firebaseArray(new firebase.database().ref().child('courts/'));
     }
   }
 
