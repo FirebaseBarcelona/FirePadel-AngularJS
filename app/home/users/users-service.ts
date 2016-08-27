@@ -5,6 +5,7 @@ module Users {
   interface IUser {
     uuid: string,
     name: string,
+    email: string,
     avatar: string
   }
   class Users {

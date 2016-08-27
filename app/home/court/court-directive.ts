@@ -24,15 +24,24 @@ module Court {
     private $firebaseArray: AngularFireArrayService;
     private $firebaseObject: AngularFireObjectService;
     private userService: any;
+    private authService: Auth.Auth;
+    private $scope: angular.IScope;
+
     public static $inject: Array<string> = [
       '$firebaseObject',
       '$firebaseArray',
       'Users',
+      'Auth',
       '$scope'
     ];
 
-    constructor($firebaseObject, $firebaseArray, Users, $scope) {
+    constructor($firebaseObject,
+                $firebaseArray,
+                Users,
+                Auth,
+                $scope) {
       this.$firebaseArray = $firebaseArray;
+      this.authService = Auth;
       this.$scope = $scope;
       this.$firebaseObject = $firebaseObject;
       this.userService = Users;
@@ -43,17 +52,23 @@ module Court {
     }
 
     public leaveCourt() {
-
+      this.$scope.data.joined = false;
+      this.$firebaseObject(
+        new firebase.database()
+          .ref()
+          .child(`courts/court${this.$scope.data.id}/users/${this.authService.getUserData().uid}`))
+          .$remove();
     }
+
     public joinCourt() {
+      this.$scope.data.joined = true;
       let userData = this.userService.getUserData();
       let userObject = this.$firebaseObject(new firebase.database().ref().child(`courts/court${this.$scope.data.id}/users/${userData.uuid}`));
-       userObject.name = userData.name;
-       userObject.email = userData.email;
-       userObject.avatar = userData.avatar;
-       userObject.uuid = userData.uuid;
-       userObject.$save();
-      console.log(userObject);
+      userObject.name = userData.name;
+      userObject.email = userData.email;
+      userObject.avatar = userData.avatar;
+      userObject.uuid = userData.uuid;
+      userObject.$save();
     }
   }
 

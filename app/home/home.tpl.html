@@ -3,11 +3,14 @@
         <h2>
             <span>WallaPadel with Firebase</span>
         </h2>
-        <div class="toolbar-user">
-            <div class="toolbar-user-avatar" style="background-image: url({{home.user.photoURL}})"></div>
+        <div class="toolbar-user" ng-show="home.userData">
+            <div class="toolbar-user-avatar" style="background-image: url({{home.userData.photoURL}})"></div>
             <span>
-                {{home.user.email}}
+                {{home.userData.email}}
             </span>
+        </div>
+        <div >
+
         </div>
     </div>
 </md-toolbar>

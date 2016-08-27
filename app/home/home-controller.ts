@@ -47,15 +47,13 @@ module HomeCtrl {
         this.setCourts(this.courtService.getCourts());
         this.checkIfAlreadyJoined();
       } else {
-        console.log('not');
         this.logIn().then((r) => {
           this.authService.setUserData(r.user);
           this.setCourts(this.courtService.getCourts());
-          console.log(this.authService);
           this.checkIfAlreadyJoined();
         });
       }
-
+      this.userData = this.authService.getUserData();
     }
 
     private checkIfAlreadyJoined() {
