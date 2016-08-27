@@ -24,11 +24,15 @@ module Auth {
     }
 
     private loadUserData() {
-      this.userData = this.$firebaseAuth().$getAuth();
+      this.setUserData(this.$firebaseAuth().$getAuth());
   }
 
     public getUserData() {
       return this.userData;
+    }
+
+    public setUserData(userData) {
+      this.userData = userData;
     }
 
   }

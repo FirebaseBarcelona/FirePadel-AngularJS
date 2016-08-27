@@ -48,9 +48,10 @@ module HomeCtrl {
         this.checkIfAlreadyJoined();
       } else {
         console.log('not');
-        this.logIn().then(() => {
-          console.log('lol');
+        this.logIn().then((r) => {
+          this.authService.setUserData(r.user);
           this.setCourts(this.courtService.getCourts());
+          console.log(this.authService);
           this.checkIfAlreadyJoined();
         });
       }
