@@ -20,8 +20,10 @@ module ChatWindow {
   export class ChatWindowController {
     private messageService: Messages.Messages;
     private authService: Auth.Auth;
+    private message: string = null;
     public messages: Array;
     public name: string;
+    private enterKeyCode: number = 13;
     public static $inject: Array<string> = [
       'Messages',
       'Auth'
@@ -34,31 +36,42 @@ module ChatWindow {
       this.authorId = this.authService.getUserData().uid;
       this.getMessages();
     }
+
+    public isInputFieldEmpty(): boolean {
+      return (this.message !== null && this.message !== '');
+    }
     private getMessages() {
       this.messages = this.messageService.getChat();
     }
 
+    public inputKeyPress(keyCode) {
+      if (keyCode === this.enterKeyCode) {
+        this.sendMessage(this.message);
+      }
+    }
+
     public sendMessage(message) {
       this.messageService.sendMessage(message, this.authService.getUserData());
+      this.message = null;
     }
   }
 
   /**
-  * @ngdoc directive
-  * @name home.directive:chatWindow
-  * @restrict EA
-  * @element
-  *
-  * @description
-  *
-  * @example
-  *   <example module="home">
-  *       <file name="index.html">
-  *           <chat-window></chat-window>
-  *       </file>
-  *   </example>
-  *
-  */
+   * @ngdoc directive
+   * @name home.directive:chatWindow
+   * @restrict EA
+   * @element
+   *
+   * @description
+   *
+   * @example
+   *   <example module="home">
+   *       <file name="index.html">
+   *           <chat-window></chat-window>
+   *       </file>
+   *   </example>
+   *
+   */
   angular
     .module('home')
     .directive('chatWindow', ChatWindowDirective);
