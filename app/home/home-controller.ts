@@ -44,7 +44,9 @@ module HomeCtrl {
       this.messageService = Messages;
       this.$rootScope.$on('leftCourt', () => {
         this.messageService.wipeChat();
-        console.log(this.messageService.messages);
+      });
+      this.$rootScope.$on('joinCourt', (e, args) => {
+        this.messageService.setChat(args.courtId);
       });
 
       this.init();
@@ -65,6 +67,7 @@ module HomeCtrl {
           for (let k in court.users) {
             if (court.users[k].uuid === this.authService.getUserData().uid) {
               court.joined = true;
+              this.joinedAnyCourt = true;
               return true;
             }
           }

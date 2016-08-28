@@ -18,14 +18,19 @@ module Court {
       }
     }
   }
-
+  interface ICourtFirebaseObject extends AngularFireObject {
+    name: string,
+    email: string,
+    avatar: string,
+    uuid: string
+  }
   export class CourtController {
 
     private $firebaseArray: AngularFireArrayService;
-    private $firebaseObject: AngularFireObjectService;
-    private $mdToast: ng.material.IToastService,
+    private $firebaseObject: ICourtFirebaseObject;
+    private $mdToast: ng.material.IToastService;
     private joined: boolean;
-    private $rootScope: angular.IRootScopeService
+    private $rootScope: angular.IRootScopeService;
     private userService: any;
     private authService: Auth.Auth;
     private $scope: angular.IScope;
@@ -65,7 +70,7 @@ module Court {
       );
     }
 
-    public leaveCourt() {
+    public leaveCourt(): void {
       this.joined = false;
       this.$rootScope.$broadcast('leftCourt');
       this.$firebaseObject(
@@ -80,7 +85,7 @@ module Court {
       )
     }
 
-    public joinCourt() {
+    public joinCourt(): void {
       this.joined = true;
       let userData = this.authService.getUserData();
       let userObject = this.$firebaseObject(
@@ -94,7 +99,7 @@ module Court {
       userObject.uuid = userData.uid;
 
       userObject.$save();
-      console.log(this.$mdToast);
+      this.$rootScope.$broadcast('joinCourt', {courtId: this.$scope.data.id});
       this.$mdToast.show(this.$mdToast.simple()
         .toastClass('md-primary')
         .textContent('You have joined the court')
