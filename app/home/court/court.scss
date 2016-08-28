@@ -1,5 +1,8 @@
 court {
-	md-content {
+	.md-fab {
+		&.hidden {
+			display: none;
+		}
 	}
 }
 .court-join-button {

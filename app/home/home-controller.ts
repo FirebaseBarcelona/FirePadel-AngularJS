@@ -63,7 +63,6 @@ module HomeCtrl {
         let joinedCourts = courts.filter((court) => {
           for (let k in court.users) {
             if (court.users[k].uuid === this.authService.getUserData().uid) {
-              court.joined = true;
               return true;
             }
           }

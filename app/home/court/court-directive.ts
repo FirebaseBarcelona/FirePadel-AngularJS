@@ -23,6 +23,7 @@ module Court {
 
     private $firebaseArray: AngularFireArrayService;
     private $firebaseObject: AngularFireObjectService;
+    private $mdToast: ng.material.IToastService,
     private userService: any;
     private authService: Auth.Auth;
     private $scope: angular.IScope;
@@ -32,6 +33,7 @@ module Court {
       '$firebaseArray',
       'Users',
       'Auth',
+      '$mdToast',
       '$scope'
     ];
 
@@ -39,8 +41,10 @@ module Court {
                 $firebaseArray,
                 Users,
                 Auth,
+                $mdToast,
                 $scope) {
       this.$firebaseArray = $firebaseArray;
+      this.$mdToast = $mdToast;
       this.authService = Auth;
       this.$scope = $scope;
       this.$firebaseObject = $firebaseObject;
@@ -48,29 +52,37 @@ module Court {
     }
 
     public hasAlreadyJoined(uuid): boolean {
-      return this.$firebaseObject(new firebase.database().ref().child(`courts/court${this.$scope.data.id}/users/${uuid}`));
+      return this.$firebaseObject(
+        new firebase.database()
+          .ref()
+          .child(`courts/court${this.$scope.data.id}/users/${uuid}`)
+      );
     }
 
     public leaveCourt() {
       this.joined = false;
-      this.$firebaseObject(
+     /* this.$firebaseObject(
         new firebase.database()
           .ref()
           .child(`courts/court${this.$scope.data.id}/users/${this.authService.getUserData().uid}`))
-          .$remove();
+          .$remove();*/
     }
 
     public joinCourt() {
       this.joined = true;
-
+/*
       let userData = this.authService.getUserData();
-      let userObject = this.$firebaseObject(new firebase.database().ref().child(`courts/court${this.$scope.data.id}/users/${userData.uid}`));
+      let userObject = this.$firebaseObject(
+        new firebase.database()
+          .ref()
+          .child(`courts/court${this.$scope.data.id}/users/${userData.uid}`)
+      );
       userObject.name = userData.displayName.split(' ')[0];
       userObject.email = userData.email;
       userObject.avatar = userData.photoURL;
       userObject.uuid = userData.uid;
 
-      userObject.$save();
+      userObject.$save();*/
     }
   }
 

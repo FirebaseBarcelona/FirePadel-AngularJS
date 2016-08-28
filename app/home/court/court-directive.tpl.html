@@ -2,19 +2,26 @@
     <md-toolbar class="md-padding">
         <md-card-title>
             <md-card-title-text>
-                <span class="md-headline">Court - {{data.id}}</span>
+                <span class="md-headline">Court - {{::data.id}}</span>
             </md-card-title-text>
         </md-card-title>
     </md-toolbar>
     <md-content class="md-padding">
         <md-card-actions>
-            <div class="court-avatar" ng-repeat="user in data.users" style="background-image: url({{user.avatar}});"></div>
-            <md-button ng-hide="court.joined" class="md-fab md-primary court-join-button" ng-click="court.joinCourt()">
+            <div class="court-avatar"
+                 ng-repeat="user in data.users"
+                 style="background-image: url({{::user.avatar}});">
+            </div>
+            <md-button
+                       ng-class="{'hidden': court.joined}"
+                       class="md-fab md-primary court-join-button"
+                       ng-click="court.joinCourt()">
                 <md-icon md-font-library="material-icons">
                     person_add
                 </md-icon>
             </md-button>
-            <md-button ng-show="court.joined" class="md-fab md-warn court-join-button" ng-click="court.leaveCourt()">
+            <md-button ng-class="{'hidden': !court.joined}"
+                       class="md-fab md-warn court-join-button" ng-click="court.leaveCourt()">
                 <md-icon md-font-library="material-icons">
                     clear
                 </md-icon>
