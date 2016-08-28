@@ -8,6 +8,7 @@ module HomeCtrl {
     private courtService: Court.Court;
     private userService: User.User;
     private messageService: Messages.Messages;
+    private joinedAnyCourt: boolean;
     private $firebaseArray: AngularFireArrayService;
     private $rootScope: angular.IRootScopeService;
     private $firebaseObject: AngularFireObjectService;
@@ -44,9 +45,11 @@ module HomeCtrl {
       this.messageService = Messages;
       this.$rootScope.$on('leftCourt', () => {
         this.messageService.wipeChat();
+        this.joinedAnyCourt = false;
       });
       this.$rootScope.$on('joinCourt', (e, args) => {
         this.messageService.setChat(args.courtId);
+        this.joinedAnyCourt = true;
       });
 
       this.init();

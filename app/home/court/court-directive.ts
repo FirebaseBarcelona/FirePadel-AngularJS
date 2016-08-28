@@ -6,7 +6,8 @@ module Court {
       restrict: 'EA',
       scope: {
         data: '=',
-        users: '='
+        users: '=',
+        joinedAnyCourt: '='
       },
       templateUrl: 'home/court/court-directive.tpl.html',
       replace: false,
@@ -35,6 +36,7 @@ module Court {
     private authService: Auth.Auth;
     private $scope: angular.IScope;
 
+
     public static $inject: Array<string> = [
       '$firebaseObject',
       '$firebaseArray',
@@ -60,6 +62,7 @@ module Court {
       this.joined = $scope.data.joined;
       this.$firebaseObject = $firebaseObject;
       this.userService = Users;
+      console.log($scope.joinedAnyCourt);
     }
 
     public hasAlreadyJoined(uuid): boolean {
