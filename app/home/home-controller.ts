@@ -44,16 +44,8 @@ module HomeCtrl {
     private init() {
       if (this.isUserLogged()) {
         this.authService.setUserData(this.authService.getUserData());
-        console.log(this.authService.getUserData());
         this.setCourts(this.courtService.getCourts());
         this.checkIfAlreadyJoined();
-      } else {
-        this.logIn().then((r) => {
-          this.authService.setUserData(r.user);
-          console.log(r.user);
-          this.setCourts(this.courtService.getCourts());
-          this.checkIfAlreadyJoined();
-        });
       }
       this.userData = this.authService.getUserData();
     }
@@ -75,13 +67,20 @@ module HomeCtrl {
       });
     }
 
+    public logInProcess() {
+      this.logIn().then((r) => {
+        this.authService.setUserData(r.user);
+        this.setCourts(this.courtService.getCourts());
+        this.checkIfAlreadyJoined();
+      });
+    }
 
     private logIn() {
       return this.authService.signInWithGoogle();
     }
 
     private isUserLogged() {
-      console.log(this.authService.getUserData());
+      console.log('is');
       return this.authService.getUserData() !== null;
     }
 

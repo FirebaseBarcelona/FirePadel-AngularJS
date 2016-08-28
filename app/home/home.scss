@@ -24,6 +24,16 @@
 body {
 	overflow-x: hidden;
 }
+.not-logged-message {
+	& {
+		padding-top: 60px;
+		text-align: center;
+	}
+	.md-primary {
+		padding: 30px;
+		font-size: 32px;
+	}
+}
 ::-webkit-scrollbar{
 	width: 10px;
 }
