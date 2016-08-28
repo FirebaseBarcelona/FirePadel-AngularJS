@@ -72,6 +72,7 @@ module HomeCtrl {
         this.authService.setUserData(r.user);
         this.setCourts(this.courtService.getCourts());
         this.checkIfAlreadyJoined();
+        this.userData = this.authService.getUserData();
       });
     }
 
@@ -80,7 +81,6 @@ module HomeCtrl {
     }
 
     private isUserLogged() {
-      console.log('is');
       return this.authService.getUserData() !== null;
     }
 
