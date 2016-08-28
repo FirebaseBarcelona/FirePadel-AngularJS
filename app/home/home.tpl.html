@@ -4,9 +4,9 @@
             <span>FirePadel</span>
         </h2>
         <div class="toolbar-user" ng-show="home.userData">
-            <div class="toolbar-user-avatar" style="background-image: url({{home.userData.photoURL}})"></div>
+            <div class="toolbar-user-avatar" style="background-image: url({{ ::home.userData.photoURL}})"></div>
             <span>
-                {{home.userData.email}}
+                {{ ::home.userData.email }}
             </span>
         </div>
         <div >
@@ -16,5 +16,5 @@
 </md-toolbar>
 <chat-window ng-if="home.messageService.messages != undefined"></chat-window>
 <div class="court-container">
-    <court ng-repeat="court in home.courts" data="court" users="home.user"></court>
+    <court ng-repeat="court in ::home.courts" data="court" users="home.user"></court>
 </div>
