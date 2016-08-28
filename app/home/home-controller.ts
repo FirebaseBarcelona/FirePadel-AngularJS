@@ -64,8 +64,8 @@ module HomeCtrl {
     private checkIfAlreadyJoined() {
       this.courts.$loaded((courts: Array) => {
         let joinedCourts = courts.filter((court) => {
-          for (let k in court.users) {
-            if (court.users[k].uuid === this.authService.getUserData().uid) {
+          for (let user in court.users) {
+            if (court.users[user].uuid === this.authService.getUserData().uid) {
               court.joined = true;
               this.joinedAnyCourt = true;
               return true;

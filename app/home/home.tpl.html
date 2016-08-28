@@ -19,5 +19,5 @@
 </div>
 <chat-window ng-if="home.messageService.messages !== null" class="md-whiteframe-6dp"></chat-window>
 <div class="court-container">
-    <court ng-repeat="court in ::home.courts" data="court" users="home.user"></court>
+    <court ng-repeat="court in home.courts" data="court" users="home.user"></court>
 </div>
