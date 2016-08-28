@@ -11,6 +11,9 @@
             <div class="court-avatar"
                  ng-repeat="user in data.users"
                  style="background-image: url({{::user.avatar}});">
+                <md-tooltip md-direction="{{demo.tipDirection}}">
+                    {{::user.name}}
+                </md-tooltip>
             </div>
             <md-button
                        ng-class="{'hidden': court.joined}"
