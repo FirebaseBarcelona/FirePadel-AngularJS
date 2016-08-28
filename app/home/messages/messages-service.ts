@@ -3,7 +3,7 @@ module Messages {
   'use strict';
 
   class Messages {
-    public messages: AngularFireArray;
+    public messages: AngularFireArray = null;
     private $firebaseArray: AngularFireArrayService;
     public static $inject: Array<string> = [
       '$firebaseArray'
@@ -21,6 +21,9 @@ module Messages {
       this.messages = this.$firebaseArray(new firebase.database().ref().child(`courts/court${courtId}/messages`));
     }
 
+    public wipeChat() {
+      this.messages = null;
+    }
     public sendMessage(message, author) {
       if (message !== null && message !== '') {
         let newMessage = {

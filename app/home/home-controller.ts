@@ -9,6 +9,7 @@ module HomeCtrl {
     private userService: User.User;
     private messageService: Messages.Messages;
     private $firebaseArray: AngularFireArrayService;
+    private $rootScope: angular.IRootScopeService;
     private $firebaseObject: AngularFireObjectService;
     public courts: Array;
     // $inject annotation.
@@ -22,6 +23,7 @@ module HomeCtrl {
       'Users',
       'Court',
       'Messages',
+      '$rootScope'
     ];
 
     // dependencies are injected via AngularJS $injector
@@ -30,14 +32,21 @@ module HomeCtrl {
                 Auth: Auth.Auth,
                 Users: Users.Users,
                 Court: Court.Court,
-                Messages: Messages.Messages) {
+                Messages: Messages.Messages,
+                $rootScope: angular.IRootScopeService) {
       this.courts = [];
       this.$firebaseArray = $firebaseArray;
+      this.$rootScope = $rootScope;
       this.$firebaseObject = $firebaseObject;
       this.authService = Auth;
       this.userService = Users;
       this.courtService = Court;
       this.messageService = Messages;
+      this.$rootScope.$on('leftCourt', () => {
+        this.messageService.wipeChat();
+        console.log(this.messageService.messages);
+      });
+
       this.init();
     }
 

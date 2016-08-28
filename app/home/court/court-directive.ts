@@ -25,6 +25,7 @@ module Court {
     private $firebaseObject: AngularFireObjectService;
     private $mdToast: ng.material.IToastService,
     private joined: boolean;
+    private $rootScope: angular.IRootScopeService
     private userService: any;
     private authService: Auth.Auth;
     private $scope: angular.IScope;
@@ -35,7 +36,8 @@ module Court {
       'Users',
       'Auth',
       '$mdToast',
-      '$scope'
+      '$scope',
+      '$rootScope'
     ];
 
     constructor($firebaseObject,
@@ -43,10 +45,12 @@ module Court {
                 Users,
                 Auth,
                 $mdToast,
-                $scope) {
+                $scope,
+                $rootScope) {
       this.$firebaseArray = $firebaseArray;
       this.$mdToast = $mdToast;
       this.authService = Auth;
+      this.$rootScope = $rootScope;
       this.$scope = $scope;
       this.joined = $scope.data.joined;
       this.$firebaseObject = $firebaseObject;
@@ -63,6 +67,7 @@ module Court {
 
     public leaveCourt() {
       this.joined = false;
+      this.$rootScope.$broadcast('leftCourt');
       this.$firebaseObject(
         new firebase.database()
           .ref()
