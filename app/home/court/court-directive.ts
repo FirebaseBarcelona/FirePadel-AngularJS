@@ -24,6 +24,7 @@ module Court {
     private $firebaseArray: AngularFireArrayService;
     private $firebaseObject: AngularFireObjectService;
     private $mdToast: ng.material.IToastService,
+    private joined: boolean;
     private userService: any;
     private authService: Auth.Auth;
     private $scope: angular.IScope;
@@ -47,6 +48,7 @@ module Court {
       this.$mdToast = $mdToast;
       this.authService = Auth;
       this.$scope = $scope;
+      this.joined = $scope.data.joined;
       this.$firebaseObject = $firebaseObject;
       this.userService = Users;
     }
@@ -61,16 +63,20 @@ module Court {
 
     public leaveCourt() {
       this.joined = false;
-     /* this.$firebaseObject(
+      this.$firebaseObject(
         new firebase.database()
           .ref()
           .child(`courts/court${this.$scope.data.id}/users/${this.authService.getUserData().uid}`))
-          .$remove();*/
+          .$remove();
+      this.$mdToast.show(this.$mdToast.simple()
+        .toastClass('md-warn')
+        .textContent('You have left the court')
+        .hideDelay(1000)
+      )
     }
 
     public joinCourt() {
       this.joined = true;
-/*
       let userData = this.authService.getUserData();
       let userObject = this.$firebaseObject(
         new firebase.database()
@@ -82,7 +88,13 @@ module Court {
       userObject.avatar = userData.photoURL;
       userObject.uuid = userData.uid;
 
-      userObject.$save();*/
+      userObject.$save();
+      console.log(this.$mdToast);
+      this.$mdToast.show(this.$mdToast.simple()
+        .toastClass('md-primary')
+        .textContent('You have joined the court')
+        .hideDelay(1000)
+      )
     }
   }
 

@@ -7,7 +7,7 @@
 
     <md-input-container md-no-float class="md-block">
         <input type="text" ng-keyup="chatWindow.inputKeyPress($event.keyCode)" placeholder="Message"
-               ng-model="chatWindow.message">
+               ng-model="chatWindow.message" style="display: inline-block !important;">
         <md-icon ng-class="{'active' : chatWindow.isInputFieldEmpty() }" md-font-library="material-icons"
                  ng-click="chatWindow.sendMessage(chatWindow.message)">send
         </md-icon>

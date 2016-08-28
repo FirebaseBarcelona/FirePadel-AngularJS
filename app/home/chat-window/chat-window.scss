@@ -17,9 +17,8 @@ chat-window {
 	}
 	.chat-messages-container {
 		position: relative;
-		height: auto;
 		overflow-y: scroll;
-		height: calc(100% - 60px);
+		height: ($chat-height - 60px);
 	}
 	md-input-container {
 		& {
@@ -29,8 +28,8 @@ chat-window {
 			padding-bottom: 5px;
 		}
 		input {
-			width: calc(100% - 34px);
 			display: inline-block !important;
+			width: calc(100% - 34px) !important;
 			vertical-align: top;
 		}
 		md-icon {
@@ -38,12 +37,14 @@ chat-window {
 				display: inline-block !important;
 				position: relative;
 				vertical-align: middle;
-				line-height: 30px;
+				line-height: 30px !important;
 				color: #9d9b99 !important;
 				fill: #9d9b99;
 				cursor: not-allowed;
 				user-select: none;
 				outline: none;
+				left: 10px !important;
+				top: 0 !important;
 			}
 			&:hover {
 				opacity: .9;

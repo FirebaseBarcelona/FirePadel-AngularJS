@@ -3,7 +3,7 @@ chat-message {
 	& {
 		display: block;
 		overflow: hidden;
-		margin-top: 20px;
+		margin-top: 10px;
 		width: calc( 100% - 4px);
 	}
 	&.self-author {
