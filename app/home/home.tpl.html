@@ -17,7 +17,7 @@
     </h2>
     <md-button class="md-raised md-primary" ng-click="home.logInProcess()">Log in with Google</md-button>
 </div>
-<chat-window ng-if="home.messageService.messages !== null" class="md-whiteframe-6dp"></chat-window>
+<chat-window ng-if="home.messageService.messages !== null" court-data="court" class="md-whiteframe-6dp"></chat-window>
 <div class="court-container">
     <court ng-repeat="court in home.courts" data="court" users="home.user" joined-any-court="home.joinedAnyCourt"></court>
 </div>
