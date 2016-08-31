@@ -10,6 +10,21 @@ chat-window {
 		right: 0;
 		height: $chat-height;
 	}
+	.chat-window-header {
+		position: absolute;
+		box-sizing: border-box;
+		top: -38px;
+		left: -10px;
+		width: 410px;
+		height: 38px;
+		color: #fff;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		background-color: #3f51b5;
+		line-height: 38px;
+		padding-left: 15px;
+		text-align: center;
+	}
 	.chat-window-container {
 		position: absolute;
 		width: $chat-width;

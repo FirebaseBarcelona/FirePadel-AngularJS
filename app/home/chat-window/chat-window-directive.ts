@@ -5,7 +5,9 @@ module ChatWindow {
   function ChatWindowDirective(): ng.IDirective {
     return {
       restrict: 'EA',
-      scope: {},
+      scope: {
+        courtData: '='
+      },
       templateUrl: 'home/chat-window/chat-window-directive.tpl.html',
       replace: false,
       controllerAs: 'chatWindow',

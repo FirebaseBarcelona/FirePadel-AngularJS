@@ -1,10 +1,10 @@
 <div class="chat-window-container">
+    <div class="chat-window-header">Court chat</div>
     <div class="chat-messages-container" scroll-glue>
         <chat-message ng-class="::{'self-author' : message.uuid == chatWindow.authorId}"
                       ng-repeat="message in chatWindow.messages"
                       message="message"></chat-message>
     </div>
-
     <md-input-container md-no-float class="md-block">
         <input type="text" ng-keyup="chatWindow.inputKeyPress($event.keyCode)" placeholder="Message"
                ng-model="chatWindow.message" style="display: inline-block !important;">

@@ -1,7 +1,8 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
         <h2>
-            <span>FirePadel - !</span>
+            <img width="64" src="https://cdn4.iconfinder.com/data/icons/google-i-o-2016/512/google_firebase-2-128.png" alt="">
+            <span>FirePadel</span>
         </h2>
         <div class="toolbar-user" ng-show="home.userData">
             <div class="toolbar-user-avatar" style="background-image: url({{ ::home.userData.photoURL}})"></div>
@@ -17,7 +18,7 @@
     </h2>
     <md-button class="md-raised md-primary" ng-click="home.logInProcess()">Log in with Google</md-button>
 </div>
-<chat-window ng-if="home.messageService.messages !== null" class="md-whiteframe-6dp"></chat-window>
+<chat-window ng-if="home.messageService.messages !== null" court-data="court" class="md-whiteframe-6dp"></chat-window>
 <div class="court-container">
     <court ng-repeat="court in home.courts" data="court" users="home.user" joined-any-court="home.joinedAnyCourt"></court>
 </div>

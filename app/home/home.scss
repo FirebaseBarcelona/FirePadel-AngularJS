@@ -2,12 +2,19 @@
 	width: 50%;
 	margin: 10px 0;
 }
-
+.md-toolbar-tools {
+	& {
+		line-height: 64px;
+	}
+	* {
+		vertical-align: middle;
+	}
+}
 .toolbar-user {
 	margin-left: auto;
 }
 .toolbar-user span {
-	line-height: 40px;
+	line-height: 64px;
 	margin-left: 5px;
 }
 .toolbar-user span,
@@ -30,8 +37,8 @@ body {
 		text-align: center;
 	}
 	.md-primary {
-		padding: 30px;
-		font-size: 32px;
+		padding: 20px;
+		font-size: 26px;
 	}
 }
 ::-webkit-scrollbar{
