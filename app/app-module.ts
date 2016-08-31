@@ -1,14 +1,14 @@
 ///<reference path='../typings/tsd.d.ts' />
-module wallaPadel {
+module firePadel {
   'use strict';
 
   /* @ngdoc object
-   * @name wallaPadel
+   * @name firePadel
    * @description
    *
    */
   angular
-    .module('wallaPadel', [
+    .module('firePadel', [
       'ngMaterial',
       'luegg.directives',
       'ui.router',

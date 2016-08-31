@@ -1,9 +1,9 @@
 ///<reference path='../typings/tsd.d.ts' />
-module wallaPadel {
+module firePadel {
     'use strict';
 
     angular
-        .module('wallaPadel')
+        .module('firePadel')
         .config(config);
 
     function config($urlRouterProvider: ng.ui.IUrlRouterProvider, $mdThemingProvider) {

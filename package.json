@@ -1,5 +1,5 @@
 {
-  "name": "WallaPadel",
+  "name": "FirePadel",
   "version": "0.0.0",
   "scripts": {
     "test": "gulp test"
