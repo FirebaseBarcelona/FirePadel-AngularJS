@@ -20,11 +20,12 @@ module ChatMessage {
   }
 
   export class ChatMessageController {
-    public name: string;
     public static $inject: Array<string> = [];
 
     constructor() {
-      this.name = 'chatMessage';
+      /**
+       * Chat message constructor
+       */
     }
   }
 

@@ -23,9 +23,10 @@ module ChatWindow {
     private messageService: Messages.Messages;
     private authService: Auth.Auth;
     private message: string = null;
+    private enterKeyCode: number = 13;
+    private authorId: string;
     public messages: Array;
     public name: string;
-    private enterKeyCode: number = 13;
     public static $inject: Array<string> = [
       'Messages',
       'Auth'
@@ -46,13 +47,13 @@ module ChatWindow {
       this.messages = this.messageService.getChat();
     }
 
-    public inputKeyPress(keyCode) {
+    public inputKeyPress(keyCode): void {
       if (keyCode === this.enterKeyCode) {
         this.sendMessage(this.message);
       }
     }
 
-    public sendMessage(message) {
+    public sendMessage(message): void {
       this.messageService.sendMessage(message, this.authService.getUserData());
       this.message = null;
     }

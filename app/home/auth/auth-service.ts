@@ -1,10 +1,11 @@
 ///<reference path='../../../typings/tsd.d.ts' />
 module Auth {
   'use strict';
+  import IPromise = angular.IPromise;
 
   class Auth {
     private $firebaseAuth: AngularFireAuthService;
-    private userData: any;
+    private userData: firePadel.IUser;
 
     public static $inject: Array<string> = [
       '$firebaseAuth'
@@ -15,7 +16,7 @@ module Auth {
       this.loadUserData();
     }
 
-    private signInWithPopup(signInMethod) {
+    private signInWithPopup(signInMethod): IPromise<{}> {
       return this.$firebaseAuth().$signInWithPopup(signInMethod);
     }
 
@@ -23,11 +24,11 @@ module Auth {
       return this.signInWithPopup('google');
     }
 
-    private loadUserData() {
+    private loadUserData(): void {
       this.setUserData(this.$firebaseAuth().$getAuth());
-  }
+    }
 
-    public getUserData() {
+    public getUserData(): firePadel.IUser {
       return this.userData;
     }
 

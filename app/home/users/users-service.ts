@@ -2,21 +2,15 @@
 module Users {
   'use strict';
 
-  interface IUser {
-    uuid: string,
-    name: string,
-    email: string,
-    avatar: string
-  }
   class Users {
-    private userData: IUser;
+    private userData: firePadel.IUser;
     public static $inject: Array<string> = [];
 
     constructor() {
-
+      this.userData = null;
     }
 
-    public setUserData(userData) {
+    public setUserData(userData: firePadel.IUser): void {
       this.userData = {
         email: userData.email,
         uuid: userData.uid,
@@ -24,7 +18,7 @@ module Users {
         name: userData.displayName
       }
     }
-    public getUserData() {
+    public getUserData(): firePadel.IUser {
       return this.userData;
     }
 

@@ -96,18 +96,27 @@ module Court {
           .ref()
           .child(`courts/court${this.$scope.data.id}/users/${userData.uid}`)
       );
-      userObject.name = userData.displayName.split(' ')[0];
-      userObject.email = userData.email;
-      userObject.avatar = userData.photoURL;
-      userObject.uuid = userData.uid;
+      Court.CourtController.mapUserObject(userObject, userData);
 
       userObject.$save();
-      this.$rootScope.$broadcast('joinCourt', {courtId: this.$scope.data.id});
+      this.broadCastJoinEvent('joinCourt', {courtId: this.$scope.data.id});
+      //noinspection TypeScriptUnresolvedFunction
       this.$mdToast.show(this.$mdToast.simple()
         .toastClass('md-primary')
         .textContent('You have joined the court')
         .hideDelay(1000)
       )
+    }
+
+    private static mapUserObject(userObject: any, userData: firePadel.IUser) {
+      userObject.name = userData.displayName.split(' ')[0];
+      userObject.email = userData.email;
+      userObject.avatar = userData.photoURL;
+      userObject.uuid = userData.uid;
+    }
+
+    private broadCastJoinEvent(broadCastTrigger, broadcastData) {
+      this.$rootScope.$broadcast(broadCastTrigger, broadcastData);
     }
   }
 

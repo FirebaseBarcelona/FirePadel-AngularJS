@@ -19,14 +19,6 @@ module Messages {
 
     public setChat(courtId) {
       this.messages = this.$firebaseArray(new firebase.database().ref().child(`courts/court${courtId}/messages`));
-      /**
-      this.$firebaseArray(new firebase.database().ref().child(`courts/court${courtId}/messages`)).$watch((e) => {
-        if (Notification.permission !== 'granted') {
-          Notification.requestPremission();
-        }
-        let n = new Notification(e.key);
-      });
-       **/
     }
 
     public wipeChat() {
