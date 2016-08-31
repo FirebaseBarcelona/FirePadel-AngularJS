@@ -2,7 +2,7 @@
 module Court {
   'use strict';
 
-  export class Court {
+  class Court {
     private courts: AngularFireArray;
     private $firebaseArray: AngularFireArrayService;
     public static $inject: Array<string> = [
