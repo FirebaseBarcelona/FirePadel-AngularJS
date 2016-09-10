@@ -23,6 +23,9 @@ preprocessors[templateDir + '**/*-directive.tpl.html'] = ['ng-html2js'];
 
 module.exports = {
   browsers: ['PhantomJS'],
+  files: [
+    'bower_components/angular/angular.js' //<-- include angularjs
+  ],
   frameworks: ['jasmine', 'sinon'],
   reporters: ['failed', 'coverage'],
   preprocessors: preprocessors,
