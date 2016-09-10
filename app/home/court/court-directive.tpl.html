@@ -18,6 +18,7 @@
             <md-button
                        ng-class="{'hidden': joinedAnyCourt}"
                        class="md-fab md-primary court-join-button"
+                       ng-disabled="data.users.length == 4"
                        ng-click="court.joinCourt()">
                 <md-icon md-font-library="material-icons">
                     person_add

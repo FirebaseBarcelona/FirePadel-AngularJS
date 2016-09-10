@@ -1,4 +1,3 @@
-///<reference path='../../typings/tsd.d.ts' />
 module HomeCtrl {
   'use strict';
 
@@ -6,14 +5,14 @@ module HomeCtrl {
 
     private authService: Auth.Auth;
     private courtService: Court.Court;
-    private userService: User.User;
+    private userService: Users.Users;
     private userData: firePadel.IUser;
     private messageService: Messages.Messages;
     private joinedAnyCourt: boolean;
     private $firebaseArray: AngularFireArrayService;
     private $rootScope: angular.IRootScopeService;
     private $firebaseObject: AngularFireObjectService;
-    public courts: Array<firePadel.ICourt>;
+    public courts: AngularFireArray;
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
@@ -66,9 +65,9 @@ module HomeCtrl {
     }
 
     private checkIfAlreadyJoined() {
-      this.courts.$loaded((courts: Array) => {
+      this.courts.$loaded((courts) => {
         let joinedCourts = courts.filter((court) => {
-          for (let user: firePadel.ICourtUser in court.users) {
+          for (let user in court.users) {
             if (court.users[user].uuid === this.authService.getUserData().uid) {
               court.joined = true;
               this.joinedAnyCourt = true;
@@ -84,7 +83,7 @@ module HomeCtrl {
     }
 
     public logInProcess() {
-      this.logIn().then((r) => {
+      this.logIn().then((r: any) => {
         this.authService.setUserData(r.user);
         this.setCourts(this.courtService.getCourts());
         this.checkIfAlreadyJoined();

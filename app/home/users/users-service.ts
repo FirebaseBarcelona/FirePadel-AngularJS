@@ -1,8 +1,7 @@
-///<reference path='../../../typings/tsd.d.ts' />
 module Users {
   'use strict';
 
-  class Users {
+  export class Users {
     private userData: firePadel.IUser;
     public static $inject: Array<string> = [];
 

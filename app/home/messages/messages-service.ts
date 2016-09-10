@@ -1,8 +1,8 @@
-///<reference path='../../../typings/tsd.d.ts' />
+///<reference path='../../../typings/index.d.ts' />
 module Messages {
   'use strict';
 
-  class Messages {
+  export class Messages {
     public messages: AngularFireArray = null;
     private $firebaseArray: AngularFireArrayService;
     public static $inject: Array<string> = [
@@ -18,6 +18,7 @@ module Messages {
     }
 
     public setChat(courtId) {
+      //noinspection TypeScriptUnresolvedVariable
       this.messages = this.$firebaseArray(new firebase.database().ref().child(`courts/court${courtId}/messages`));
     }
 

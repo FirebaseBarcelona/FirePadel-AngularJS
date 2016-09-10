@@ -1,9 +1,8 @@
-///<reference path='../../../typings/tsd.d.ts' />
 module Auth {
   'use strict';
   import IPromise = angular.IPromise;
 
-  class Auth {
+  export class Auth {
     private $firebaseAuth: AngularFireAuthService;
     private userData: firePadel.IUser;
 

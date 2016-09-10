@@ -25,6 +25,9 @@ module Court {
     avatar: string,
     uuid: string
   }
+  interface ICourtScope extends angular.IScope {
+    data: any
+  }
   export class CourtController {
 
     private $firebaseArray: AngularFireArrayService;
@@ -34,7 +37,7 @@ module Court {
     private $rootScope: angular.IRootScopeService;
     private userService: any;
     private authService: Auth.Auth;
-    private $scope: angular.IScope;
+    private $scope: ICourtScope;
 
 
     public static $inject: Array<string> = [
@@ -96,7 +99,7 @@ module Court {
           .ref()
           .child(`courts/court${this.$scope.data.id}/users/${userData.uid}`)
       );
-      Court.CourtController.mapUserObject(userObject, userData);
+      this.mapUserObject(userObject, userData);
 
       userObject.$save();
       this.broadCastJoinEvent('joinCourt', {courtId: this.$scope.data.id});
@@ -108,7 +111,7 @@ module Court {
       )
     }
 
-    private static mapUserObject(userObject: any, userData: firePadel.IUser) {
+    private mapUserObject(userObject: any, userData: firePadel.IUser) {
       userObject.name = userData.displayName.split(' ')[0];
       userObject.email = userData.email;
       userObject.avatar = userData.photoURL;
