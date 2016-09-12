@@ -19,9 +19,19 @@ module ChatMessage {
   }
 
   export class ChatMessageController {
-    public static $inject: Array<string> = [];
+    public message;
+    private $scope;
+    public static $inject: Array<string> = [
+        '$scope'
+    ];
 
-    constructor() {
+    constructor($scope) {
+      this.$scope = $scope;
+      this.message = {
+        avatar: this.$scope.message.avatar,
+        message: this.$scope.message.message,
+        name: this.$scope.message.name.split(' ')[0]
+      };
       /**
        * Chat message constructor
        */
