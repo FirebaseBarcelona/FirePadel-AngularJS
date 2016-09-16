@@ -51,8 +51,9 @@ module HomeCtrl {
         this.messageService.setChat(args.courtId);
         this.joinedAnyCourt = true;
       });
-
-      this.init();
+      this.$rootScope.$on('authStateChange', () => {
+        this.init();
+      });
     }
 
     private init() {

@@ -4,14 +4,17 @@ module Auth {
 
   export class Auth {
     private $firebaseAuth: AngularFireAuthService;
-    private userData: firePadel.IUser;
+    private $rootScope: ng.IRootScopeService;
+    private userData: firePadel.IUser = null;
 
     public static $inject: Array<string> = [
-      '$firebaseAuth'
+      '$firebaseAuth',
+      '$rootScope'
     ];
 
-    constructor($firebaseAuth: AngularFireAuthService) {
+    constructor($firebaseAuth: AngularFireAuthService, $rootScope: ng.IRootScopeService) {
       this.$firebaseAuth = $firebaseAuth;
+      this.$rootScope = $rootScope;
       this.loadUserData();
     }
 
@@ -24,7 +27,10 @@ module Auth {
     }
 
     private loadUserData(): void {
-      this.setUserData(this.$firebaseAuth().$getAuth());
+      return this.$firebaseAuth().$onAuthStateChanged((r) => {
+        this.setUserData(r);
+        this.$rootScope.$broadcast('authStateChange');
+      });
     }
 
     public getUserData(): firePadel.IUser {
