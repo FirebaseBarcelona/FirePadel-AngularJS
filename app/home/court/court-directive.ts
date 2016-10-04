@@ -66,6 +66,7 @@ module Court {
       this.$firebaseObject = $firebaseObject;
       this.userService = Users;
       console.log($scope.joinedAnyCourt);
+
     }
 
     public hasAlreadyJoined(uuid): boolean {
@@ -89,6 +90,12 @@ module Court {
         .textContent('You have left the court')
         .hideDelay(1000)
       )
+    }
+    public getUserLength(users) {
+      if (users) {
+        return (Object.keys(users).length == 4);
+      }
+      return false;
     }
 
     public joinCourt(): void {
